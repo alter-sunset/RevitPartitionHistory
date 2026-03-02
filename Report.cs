@@ -8,6 +8,7 @@ public class Report
     public DateTime TimeStamp { get; }
     public string? UserName { get; }
     public string? Comment { get; }
+    public string ReportLine => $"{FileName}|{TimeStamp}|{UserName}|{Comment}";
     
     public Report(string path)
     {
@@ -29,5 +30,4 @@ public class Report
         UserName = parts[1];
         Comment = parts[2];
     }
-    
 }
