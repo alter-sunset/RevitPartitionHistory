@@ -8,19 +8,19 @@ public class TempDirectory : IDisposable
 {
     public TempDirectory()
     {
-        string tempDir = System.IO.Path.GetTempPath();
-        Path = System.IO.Path.Combine(tempDir, "RevitCollaborationHistory");
-        Directory.CreateDirectory(Path);
+        string tempDir = Path.GetTempPath();
+        Dir = Path.Combine(tempDir, "RevitCollaborationHistory");
+        Directory.CreateDirectory(Dir);
     }
 
-    private string Path { get; }
-    public string Script => System.IO.Path.Combine(Path, "script.txt");
+    private string Dir { get; }
+    public string Script => Path.Combine(Dir, "script.txt");
     
-    public string ReportsDirectory => System.IO.Path.Combine(Path, "Reports");
+    public string ReportsDirectory => Path.Combine(Dir, "Reports");
     public IEnumerable<string> Reports => Directory.EnumerateFiles(ReportsDirectory);
 
     public void Dispose()
     {
-        Directory.Delete(Path, true);
+        Directory.Delete(Dir, true);
     }
 }

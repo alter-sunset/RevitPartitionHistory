@@ -12,7 +12,7 @@ class Program
     private static readonly string DownloadsFolderPath =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
 
-    private static void Main(string[] args)
+    private static void Main()
     {
         string inputDirectory = ObtainInputDirectory();
         
