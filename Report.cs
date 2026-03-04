@@ -3,7 +3,7 @@ using System.Globalization;
 namespace RevitCollaborationHistory;
 
 /// <summary>
-/// Class to read Revit Partition History Report
+/// Class to read Revit Partition History Report and store last synchronization data
 /// </summary>
 public class Report
 {
@@ -11,7 +11,6 @@ public class Report
     public DateTime TimeStamp { get; }
     public string UserName { get; }
     public string Comment { get; }
-    public string ReportLine => $"{FileName}|{TimeStamp}|{UserName}|{Comment}";
     
     public Report(string path)
     {
@@ -32,5 +31,18 @@ public class Report
 
         UserName = columns[1];
         Comment = columns[2];
+    }
+
+    /// <summary>
+    /// </summary>
+    /// <returns>String formated like this: FileName|TimeStamp|UserName|Comment</returns>
+    public override string ToString()
+    {
+        return $"{FileName}|{TimeStamp}|{UserName}|{Comment}";
+    }
+    
+    public string ToString(string separator)
+    {
+        return string.Join(separator, FileName, TimeStamp, UserName, Comment);
     }
 }

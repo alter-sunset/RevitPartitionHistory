@@ -112,7 +112,7 @@ class Program
         sb.AppendLine("FileName|TimeStamp|UserName|Comment");
         foreach (Report report in reports)
         {
-            sb.AppendLine(report.ReportLine);
+            sb.AppendLine(report.ToString());
         }
         
         File.WriteAllText(csvPath, sb.ToString());
