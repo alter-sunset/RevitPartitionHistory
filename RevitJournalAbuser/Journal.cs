@@ -46,6 +46,13 @@ public class Journal: IDisposable
         File.WriteAllText(_scriptFilePath, _stringBuilder.ToString());
         _stringBuilder.Clear();
     }
+
+    public void CompleteWithoutExit()
+    {
+        _completed = true;
+        File.WriteAllText(_scriptFilePath, _stringBuilder.ToString());
+        _stringBuilder.Clear();
+    }
     
     public void Dispose()
     {

@@ -69,9 +69,10 @@ internal static class Program
     /// <param name="version">Revit version (eg 2022)</param>
     private static IEnumerable<Report> GetReports(ReportsTempDirectory reportsTempDir, int version)
     {
-        Abuser abuser = new(version, reportsTempDir);
+        using Abuser abuser = new(version, reportsTempDir);
         
         abuser.RunJournalScript();
+        abuser.WaitForExit();
 
         return reportsTempDir.Reports
             .Select(r => new Report(r));

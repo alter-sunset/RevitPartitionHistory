@@ -7,8 +7,10 @@ namespace RevitJournalAbuser;
 /// <summary>
 /// Class to run Revit Journal File in specified Revit version
 /// </summary>
-public class Abuser
+public class Abuser: IDisposable
 {
+    private Process _process;
+    
     private int Version
     {
         get;
@@ -126,8 +128,17 @@ public class Abuser
             UseShellExecute = false
         };
 
-        Process process = Process.Start(startInfo);
+        _process = Process.Start(startInfo);
+    }
+    
+    public void WaitForExit()
+    {
+        _process?.WaitForExit();
+    }
 
-        process?.WaitForExit();
+    public void Dispose()
+    {
+        _process.Kill();
+        _process.Dispose();
     }
 }
