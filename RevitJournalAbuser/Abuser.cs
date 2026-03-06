@@ -138,7 +138,7 @@ public class Abuser: IDisposable
 
     public void Dispose()
     {
-        _process.Kill();
+        if (!_process.HasExited) _process.Kill();
         _process.Dispose();
     }
 }
