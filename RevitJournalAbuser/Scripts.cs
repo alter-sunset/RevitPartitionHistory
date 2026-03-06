@@ -38,4 +38,20 @@ public static class Scripts
                                , "Close, IDCANCEL"
                  """;
     }
+
+    /// <summary>
+    /// Generate script to execute an ExternalCommand (e.g. custom addon)
+    /// </summary>
+    /// <param name="tabName">Name of a Tab on a Ribbon</param>
+    /// <param name="panelName">Name of a Panel in the Tab</param>
+    /// <param name="buttonName">Name of a Button in the Panel</param>
+    /// <param name="fullPathToCommand">Full path to Class associated with the Button</param>
+    /// <returns>Script is string format</returns>
+    public static string RunExternalCommandButton(string tabName, string panelName, string buttonName, string fullPathToCommand)
+    {
+        buttonName = buttonName.Split('\n')[0]; // Have to use only first line of a name
+        return $"""
+                Jrn.RibbonEvent "Execute external command:CustomCtrl_%CustomCtrl_%{tabName}%{panelName}%{buttonName}:{fullPathToCommand}"
+                """;
+    }
 }
