@@ -4,6 +4,9 @@ using System.Text;
 
 namespace RevitJournalAbuser;
 
+/// <summary>
+/// Used for generating correct Revit Journal file
+/// </summary>
 public class Journal: IDisposable
 {
     private const string Header = """
@@ -21,6 +24,8 @@ public class Journal: IDisposable
     private readonly StringBuilder _stringBuilder;
     private bool _completed;
     
+    /// <param name="scriptPath">Path to resulting Journal script</param>
+    /// <param name="parts">Script parts to add into Journal</param>
     public Journal(string scriptPath, params string[] parts)
     {
         _scriptFilePath = scriptPath;
@@ -39,6 +44,9 @@ public class Journal: IDisposable
         }
     }
 
+    /// <summary>
+    /// Write out resulting script including Revit termination at the end of a Journal 
+    /// </summary>
     public void Complete()
     {
         _stringBuilder.AppendLine(Footer);
@@ -47,6 +55,9 @@ public class Journal: IDisposable
         _stringBuilder.Clear();
     }
 
+    /// <summary>
+    /// Write out resulting script excluding Revit termination at the end of a Journal
+    /// </summary>
     public void CompleteWithoutExit()
     {
         _completed = true;
