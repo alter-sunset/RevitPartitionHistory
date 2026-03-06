@@ -14,19 +14,19 @@ internal static class Program
 
     private static void Main()
     {
+        string csvPath = Path.Combine(DownloadsFolderPath, $"{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.txt");
         string inputDir = ObtainInputDirectory();
         
         IEnumerable<string> files = Directory
             .EnumerateFiles(inputDir, "*.rvt", SearchOption.AllDirectories)
             .Where(File.Exists)
             .Where(f => Path.GetExtension(f) == ".rvt");
-        
-        using TempDirectory tempDir = CreateTempEnvironment(files);
-        IEnumerable<Report> reports = GetReports(tempDir, 2023);
-        
-        string csvPath = Path.Combine(DownloadsFolderPath, $"{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.txt");
-        
-        PrintResult(reports, csvPath);
+
+        using (ReportsTempDirectory reportsTempDir = CreateTempEnvironment(files))
+        {
+            IEnumerable<Report> reports = GetReports(reportsTempDir, 2023);
+            PrintResult(reports, csvPath);
+        }
         Finisher(csvPath);
     }
 
@@ -52,31 +52,31 @@ internal static class Program
     /// </summary>
     /// <param name="files">RVT files path</param>
     /// <returns>Path to the resulting temp environment</returns>
-    private static TempDirectory CreateTempEnvironment(IEnumerable<string> files)
+    private static ReportsTempDirectory CreateTempEnvironment(IEnumerable<string> files)
     {
-        TempDirectory tempDir = new(true);
+        ReportsTempDirectory reportsTempDir = new();
         
         string[] fileScripts = files
-            .Select(file => file.CreatePartitionHistory(tempDir.ReportsDirectory))
+            .Select(file => file.CreatePartitionHistory(reportsTempDir.ReportsDirectory))
             .ToArray();
         
-        using Journal journal = new(tempDir.Script, fileScripts);
+        using Journal journal = new(reportsTempDir.Script, fileScripts);
         
-        return tempDir;
+        return reportsTempDir;
     }
 
     /// <summary>
     /// Start Revit process with a given Journal Script
     /// </summary>
-    /// <param name="tempDir">TempDirectory that contains Journal Script and Reports folder</param>
+    /// <param name="reportsTempDir">TempDirectory that contains Journal Script and Reports folder</param>
     /// <param name="version">Revit version (eg 2022)</param>
-    private static IEnumerable<Report> GetReports(TempDirectory tempDir, int version)
+    private static IEnumerable<Report> GetReports(ReportsTempDirectory reportsTempDir, int version)
     {
-        Abuser abuser = new(version, tempDir);
+        Abuser abuser = new(version, reportsTempDir);
         
         abuser.RunJournalScript();
 
-        return tempDir.Reports
+        return reportsTempDir.Reports
             .Select(r => new Report(r));
     }
 

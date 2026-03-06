@@ -18,7 +18,7 @@ public abstract class TempDirectory : IDisposable
     /// </summary>
     public string Script => Path.Combine(Dir, "script.txt");
 
-    public TempDirectory()
+    protected TempDirectory()
     {
         string tempDir = Path.GetTempPath();
         Dir = Path.Combine(tempDir, "RevitJournalAbuser");

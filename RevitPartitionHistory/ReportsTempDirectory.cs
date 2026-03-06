@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.IO;
+using RevitJournalAbuser;
 
 namespace RevitPartitionHistory;
 
-public class TempDirectory: RevitJournalAbuser.TempDirectory
+public class ReportsTempDirectory: TempDirectory
 {
     /// <summary>
     /// Path to Reports subdirectory
@@ -15,7 +16,7 @@ public class TempDirectory: RevitJournalAbuser.TempDirectory
     /// </summary>
     public IEnumerable<string> Reports => Directory.EnumerateFiles(ReportsDirectory);
 
-    public TempDirectory(bool createReportsDirectory)
+    public ReportsTempDirectory()
     {
         Directory.CreateDirectory(ReportsDirectory);
     }
