@@ -1,7 +1,5 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitJournalAbuser", "RevitJournalAbuser\RevitJournalAbuser.csproj", "{CE9C2D6A-2E22-4491-A900-6A3FF395C974}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitPartitionHistory", "RevitPartitionHistory\RevitPartitionHistory.csproj", "{0EAB080F-14F8-41E5-B6F3-A501FE9A6E52}"
 EndProject
 Global
@@ -10,10 +8,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CE9C2D6A-2E22-4491-A900-6A3FF395C974}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE9C2D6A-2E22-4491-A900-6A3FF395C974}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE9C2D6A-2E22-4491-A900-6A3FF395C974}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE9C2D6A-2E22-4491-A900-6A3FF395C974}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0EAB080F-14F8-41E5-B6F3-A501FE9A6E52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0EAB080F-14F8-41E5-B6F3-A501FE9A6E52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EAB080F-14F8-41E5-B6F3-A501FE9A6E52}.Release|Any CPU.ActiveCfg = Release|Any CPU

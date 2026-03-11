@@ -1,9 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <Nullable>disable</Nullable>
-        <LangVersion>14</LangVersion>
-        <TargetFrameworks>net10.0;net9.0;net8.0;netstandard2.1;netstandard2.0;net48;net472;net47</TargetFrameworks>
-    </PropertyGroup>
-
-</Project>
