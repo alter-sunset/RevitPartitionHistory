@@ -22,7 +22,7 @@ internal static class Program
             IEnumerable<Report> reports = reportsTempDir.GetReports(2023);
             PrintResult(reports, csvPath);
         }
-        Finisher(csvPath);
+        Finalize(csvPath);
     }
 
     /// <summary>
@@ -59,7 +59,7 @@ internal static class Program
         File.WriteAllText(csvPath, sb.ToString());
     }
 
-    private static void Finisher(string csvPath)
+    private static void Finalize(string csvPath)
     {
         Console.WriteLine("The work is done! Final report available at " + csvPath);
         Console.WriteLine("Press Enter to exit...");
